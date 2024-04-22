@@ -29,14 +29,16 @@ class GFG {
 // } Driver Code Ends
 
 
+
+
 // User function Template for Java
 
 class Solution {
     int minRow(int n, int m, int arr[][]) {
         // code here
         
-        
-        int ans=-1;
+          
+        int ans= 1;
         int max =Integer.MIN_VALUE;
         for(int i=0;i<n;i++){
             int cnt =0;
