@@ -68,23 +68,29 @@ class Solution {
     public static int countNodes(Node root) {
         // Code here
         
-         if (root == null) {
-            return 0;
-        }
-        int[] count = {0};
-
-        inorder(root, count);
-
-        return count[0];
-    }
-      public static  void inorder(Node root, int[] count) {
+        if(root == null ) return 0;
         
-        if (root == null) {
-            return;
+        int lh = findLeftHeight(root);
+        int rh= findRightHeight(root);
+        if(lh == rh){
+            return (1 << lh)-1;
         }
-
-        count[0]++;
-        inorder(root.left, count);      
-        inorder(root.right, count);
+        return countNodes(root.left)+countNodes(root.right)+1;
+    }
+    private static int findLeftHeight(Node node){
+        int height =0;
+        while( node != null){
+            height++;
+            node = node.left;
+        }
+        return height;
+    }
+    private static  int findRightHeight(Node node){
+        int height =0;
+        while( node != null){
+            height++;
+            node = node.right;
+        }
+        return height;
     }
 }
