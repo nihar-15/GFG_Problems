@@ -1,32 +1,28 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
-import java.util.*;
-import java.lang.*;
 import java.io.*;
+import java.lang.*;
+import java.util.*;
 
-class Node
-{
+class Node {
     int data;
     Node next;
-    Node(int key)
-    {
+
+    Node(int key) {
         data = key;
         next = null;
     }
 }
 
-class Driverclass
-{
-    public static void main (String[] args) throws IOException
-    {
-        BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out=new PrintWriter(System.out);
+public class Driverclass {
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
         int t = Integer.parseInt(in.readLine().trim());
-        
-        while(t-- > 0)
-        {
-            int n =Integer.parseInt(in.readLine().trim());
+
+        while (t-- > 0) {
+            int n = Integer.parseInt(in.readLine().trim());
             String s[] = in.readLine().trim().split(" ");
             Node head = new Node(Integer.parseInt(s[0]));
             Node tail = head;
@@ -41,27 +37,20 @@ class Driverclass
         }
         out.close();
     }
-    
-    public static void printList(Node head,PrintWriter out)
-    {
-        if(head == null)
-           return;
-           
+
+    public static void printList(Node head, PrintWriter out) {
+        if (head == null) return;
+
         Node temp = head;
-        while(temp != null)
-        {
+        while (temp != null) {
             out.print(temp.data + " ");
             temp = temp.next;
         }
     }
-    
-    
 }
-
-
-
-
 // } Driver Code Ends
+
+
 
 
 //User function Template for Java
