@@ -64,29 +64,35 @@ class Solution
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
         // add your code here
-        boolean vis[] = new boolean[V];
-        Stack<Integer> stack = new Stack<>();
-        for(int i =0 ;  i < V ; i++){
-            if(!vis[i]){
-                dfs(adj , i , vis , stack);
-            }
-        }
-        int  ans[] = new int[V];
-        int i =0;
-        while(!stack.isEmpty()){
-            ans[i++] = stack.pop();
-        }
-        return ans;
+         int indegree[] = new int[V];
+         for(int i =0 ; i< V ;i++){
+             for(Integer a : adj.get(i)){
+              indegree[a] ++;   
+             }
+         }
+         Queue<Integer> q = new LinkedList<>();
+         for(int i =0 ; i<V ;i++){
+             if(indegree[i] == 0){
+                 
+                 q.offer(i);
+             }
+         }
+         int i =0 ;
+         int ans[] = new int[V];
+         while(!q.isEmpty()){
+           int node =  q.poll();
+           ans[i++] = node;
+           for(Integer it  : adj.get(node)){
+               if(indegree[it] != 0){
+                   indegree[it] --;
+               }
+               if(indegree[it]  == 0){
+                   q.offer(it);
+               }
+           }
+           
+         }
+         return ans;
+        
     }
-    static void dfs(ArrayList<ArrayList<Integer>> adj , int node , boolean vis[] , Stack<Integer> stack)
-{
-    vis[node] = true;
-    for(Integer neighbour : adj.get(node)){
-        if(!vis[neighbour]){
-            dfs(adj , neighbour , vis ,stack );
-        }
-    }
-    stack.push(node);
-}
-    
 }
