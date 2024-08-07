@@ -1,72 +1,57 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
-import java.util.*;
-import java.lang.*;
 import java.io.*;
+import java.lang.*;
+import java.util.*;
 
 class GFG {
-	public static void main(String[] args) throws IOException
-	{
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine().trim());
-        while(t-->0)
-        {
-            StringTokenizer stt = new StringTokenizer(br.readLine());
-            
-            int n = Integer.parseInt(stt.nextToken());
-            int m = Integer.parseInt(stt.nextToken());
-            int k = Integer.parseInt(stt.nextToken());
-            int a[] = new int[(int)(n)];
-            int b[] = new int[(int)(m)];
-            
-            
-            String inputLine[] = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++) {
-                a[i] = Integer.parseInt(inputLine[i]);
+        while (t-- > 0) {
+            int k = Integer.parseInt(br.readLine().trim());
+
+            String[] line1 = br.readLine().trim().split(" ");
+            int[] arr1 = new int[line1.length];
+            for (int i = 0; i < line1.length; i++) {
+                arr1[i] = Integer.parseInt(line1[i]);
             }
-            String inputLine1[] = br.readLine().trim().split(" ");
-            for (int i = 0; i < m; i++) {
-                b[i] = Integer.parseInt(inputLine1[i]);
+
+            String[] line2 = br.readLine().trim().split(" ");
+            int[] arr2 = new int[line2.length];
+            for (int i = 0; i < line2.length; i++) {
+                arr2[i] = Integer.parseInt(line2[i]);
             }
-            
-            
-            Solution obj = new Solution();
-            System.out.println(obj.kthElement( a, b, n, m, k));
-            
+
+            Solution ob = new Solution();
+            System.out.println(ob.kthElement(k, arr1, arr2));
         }
-	}
+    }
 }
 
 // } Driver Code Ends
 
 
-//User function Template for Java
-
+// User function Template for Java
 
 class Solution {
-    public long kthElement( int arr1[], int arr2[], int n, int m, int k) {
-        
+    public long kthElement(int k, int arr1[], int arr2[]) {
+        // code here
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for(int a: arr1){
-            if(!pq.contains(a)){
-                 pq.offer(a);
+        for(int a : arr1){
+            pq.offer(a);
+            if(pq.size() > k){
+                pq.poll();
             }
-           
+        }
+         for(int a : arr2){
+            pq.offer(a);
             if(pq.size() > k){
                 pq.poll();
             }
         }
         
-        for(int a: arr2){
-            if(!pq.contains(a)){
-                 pq.offer(a);
-            }
-           
-            if(pq.size() > k){
-                pq.poll();
-            }
-        }
-        return (long)pq.poll();
+        return pq.poll();
     }
 }
