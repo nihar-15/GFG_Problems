@@ -64,35 +64,31 @@ class Solution
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
         // add your code here
-         int indegree[] = new int[V];
-         for(int i =0 ; i< V ;i++){
-             for(Integer a : adj.get(i)){
-              indegree[a] ++;   
-             }
-         }
-         Queue<Integer> q = new LinkedList<>();
-         for(int i =0 ; i<V ;i++){
-             if(indegree[i] == 0){
-                 
-                 q.offer(i);
-             }
-         }
-         int i =0 ;
-         int ans[] = new int[V];
-         while(!q.isEmpty()){
-           int node =  q.poll();
-           ans[i++] = node;
-           for(Integer it  : adj.get(node)){
-               if(indegree[it] != 0){
-                   indegree[it] --;
-               }
-               if(indegree[it]  == 0){
-                   q.offer(it);
-               }
-           }
-           
-         }
-         return ans;
-        
+       
+      int indegree[] = new int[V];
+        for (int i = 0; i < V; i++) {
+            for (int it : adj.get(i)) {
+                indegree[it]++;
+            }
+        }
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0 ; i< V ; i++){
+            if(indegree[i] == 0 ){
+                q.offer(i);
+            }
+        }
+        int ans[] = new int[V];
+        int i = 0;
+        while(!q.isEmpty()){
+            int curr = q.poll();
+            ans[i++] = curr;
+            for(int k : adj.get(curr)){
+                indegree[k] --;
+                if(indegree[k] == 0){
+                    q.offer(k);
+                }
+            }
+        }
+        return ans;
     }
 }
