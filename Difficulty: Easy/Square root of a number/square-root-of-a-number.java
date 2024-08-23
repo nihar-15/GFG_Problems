@@ -23,6 +23,19 @@ this function*/
 // x: element to find square root
 class Solution {
     long floorSqrt(long n) {
-        return (long)Math.sqrt(n);
+        // Your code here
+        if(n ==1){
+            return 1;
+        }
+        long low = 0 , high = n /2;
+        while(low <= high){
+            long mid = (low + high) / 2;
+            if((mid*mid) <= n){
+                low = mid +1 ;
+            }else{
+                high = mid -1;
+            }
+        }
+        return high;
     }
 }
