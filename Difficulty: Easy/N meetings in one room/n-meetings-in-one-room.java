@@ -31,49 +31,37 @@ class GFG {
 
 
 class Solution {
-    // Function to find the maximum number of meetings that can
-    // be performed in a meeting room.
     public int maxMeetings(int n, int start[], int end[]) {
-        // add your code here
-        
-        ArrayList<timings> arr = new ArrayList<>();
-        
-        for(int i =0 ; i< n ; i++){
-            arr.add(new timings(start[i] , end[i] , i));
-        }
-        Collections.sort(arr , new custom_cum());
-        int time = arr.get(0).end;
-        int count =1; 
-        for(int i = 1 ; i < n ; i++){
-            if(arr.get(i).start > time){
-                count++;
-                time = arr.get(i).end;
-            }
-        }
-        return count;
+     ArrayList<Meeting> arr = new ArrayList<>();
+     for(int i = 0 ;i< n ; i++){
+         arr.add(new Meeting(start[i] , end[i]));
+     }
+     Collections.sort(arr);
+     int endTime = arr.get(0).end;
+     int cnt = 1 ;
+     // arr.get(0).tostring();
+     for(int i = 1 ; i < n ; i++){
+      // arr.get(i).tostring();
+         if(arr.get(i).start > endTime){
+             cnt++;
+             endTime = arr.get(i).end;
+         }
+     }
+     return cnt;
     }
 }
-
-
-class timings
-{
-    int start;
-    int end;
-    int pos;
-    timings(int start, int end, int pos)
-    {
-        this.start=start;
-        this.end=end;
-        this.pos=pos;
+class Meeting implements Comparable<Meeting>{
+    int start , end ;
+    
+    Meeting(int s , int e){
+        start = s;
+        end = e;
     }
+    public int compareTo(Meeting m) {
+    return Integer.compare(this.end, m.end);
 }
 
-class custom_cum implements Comparator<timings>
-{
-    public int compare(timings t1, timings t2)
-    {
-        if(t1.end!=t2.end)
-            return t1.end-t2.end;
-        return t1.pos-t2.pos;
+    public void tostring(){
+        System.out.println(this.start +" " + this.end);
     }
 }
