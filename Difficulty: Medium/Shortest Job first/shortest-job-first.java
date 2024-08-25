@@ -31,12 +31,14 @@ class GFG {
 class Solution {
     static int solve(int bt[] ) {
     // code here
-Arrays.sort(bt);
-int w=0,s=0;
-for(int a:bt){
-    s+=a;
-    w+=s-a;}
-return w/bt.length;
+     Arrays.sort(bt);
+     int w=0,s=0;
+     for(int a:bt){
+       s+=a;
+       w+=s-a;
+         
+     }
+     return w/bt.length;
   }
 }
      
