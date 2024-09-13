@@ -1,10 +1,8 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
-
-
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -12,17 +10,17 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine().trim());
         while (tc-- > 0) {
-            String[] inputLine;
-            int n = Integer.parseInt(br.readLine().trim());
-            int[] arr = new int[n];
-            inputLine = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++) {
-                arr[i] = Integer.parseInt(inputLine[i]);
+            String input = br.readLine();
+            String[] inputArray = input.split("\\s+");
+            ArrayList<Integer> arr = new ArrayList<>();
+
+            for (String s : inputArray) {
+                arr.add(Integer.parseInt(s));
             }
 
-            new Solution().rearrange(arr, n);
-            for (int i = 0; i < n; i++) {
-                System.out.print(arr[i] + " ");
+            new Solution().rearrange(arr);
+            for (int num : arr) {
+                System.out.print(num + " ");
             }
             System.out.println();
         }
@@ -32,39 +30,41 @@ public class Main {
 // } Driver Code Ends
 
 
-//User function Template for Java
-
-
-
+// User function Template for Java
 
 class Solution {
-    void rearrange(int arr[], int n) {
+    void rearrange(ArrayList<Integer> arr) {
         // code here
-            List<Integer> pos = new ArrayList<>();
-        List<Integer> neg = new ArrayList<>();
         
-        for(int num : arr){
-            if(num>=0){
-                pos.add(num);
-            }else{
-                neg.add(num);
+          // code here
+        ArrayList<Integer>postiveArray =new ArrayList<>();
+        ArrayList<Integer>negativeArray =new ArrayList<>();
+        for(int num: arr)
+        {
+            if(num<0)
+            negativeArray.add(num);
+            else
+            postiveArray.add(num);
+        }
+        int positerator=0,negiterator=0,mainiterator=0;
+        
+        while((positerator<postiveArray.size()) && (negiterator<negativeArray.size()))
+        {
+            arr.set(mainiterator++,postiveArray.get(positerator++));
+            arr.set(mainiterator++,negativeArray.get(negiterator++));
+        }
+        if(postiveArray.size()<negativeArray.size())
+        {
+            while(negiterator<negativeArray.size())
+            {
+                arr.set(mainiterator++,negativeArray.get(negiterator++));   
             }
-        }
-        int i=0,j=0,k=0;
-        while(i<pos.size() && j<neg.size()){
-            arr[k] = pos.get(i);
-            k++;
-            arr[k] = neg.get(j);
-            k++;
-            i++;j++;
-        }
-        while(i<pos.size()){
-            arr[k] = pos.get(i);
-            i++;k++;
-        }
-        while(j<neg.size()){
-            arr[k] = neg.get(j);
-            j++;k++;
+        }else
+        {
+            while(positerator<postiveArray.size())
+            {
+                arr.set(mainiterator++,postiveArray.get(positerator++));   
+            }
         }
     }
 }
