@@ -1,58 +1,61 @@
 //{ Driver Code Starts
 // Initial Template for Java
-
 import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-class GFG {
-    public static void main(String args[]) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            int N = sc.nextInt();
-            int K = sc.nextInt();
-            int[] arr = new int[N];
-            for (int i = 0; i < N; i++) {
-                arr[i] = sc.nextInt();
+
+// } Driver Code Ends
+// User function Template for Java
+
+class Solution {
+    public int minimizeCost(int k, int arr[]) {
+       
+        int[] dp = new int[arr.length];
+        Arrays.fill(dp,100000);
+        dp[0] = 0;   // cost for first stone
+        
+        for(int i=0 ; i<arr.length-1 ; i++) {
+            for(int j=i+1;j<arr.length && j<=i+k ; j++) {
+                
+                // Explore next k stones
+                
+                dp[j] = Math.min(dp[j], dp[i] + Math.abs(arr[i]-arr[j]));
             }
+        }
+        
+        return dp[arr.length-1];
+    }
+}
+
+
+//{ Driver Code Starts.
+
+class GFG {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        while (t-- > 0) {
+            int k = Integer.parseInt(br.readLine());
+            String line = br.readLine();
+            String[] tokens = line.split(" ");
+
+            // Create an ArrayList to store the integers
+            ArrayList<Integer> array = new ArrayList<>();
+
+            // Parse the tokens into integers and add to the array
+            for (String token : tokens) {
+                array.add(Integer.parseInt(token));
+            }
+
+            int[] arr = new int[array.size()];
+            int idx = 0;
+            for (int i : array) arr[idx++] = i;
             Solution obj = new Solution();
-            int res = obj.minimizeCost(arr, N, K);
+            int res = obj.minimizeCost(k, arr);
+
             System.out.println(res);
         }
     }
 }
 // } Driver Code Ends
-
-
-// User function Template for Java
-
-class Solution {
-    public int minimizeCost(int arr[], int N, int K) {
-        // code here
-        int dp[] = new int[N+1];
-        Arrays.fill(dp , -1);
-        
-        return func(arr , 0 , N , K , dp);
-    }
-    
-    int func(int arr[] , int i, int n , int k , int dp[]){
-        
-        if(i == n-1 ){
-            return 0;
-        }
-        
-        if(dp[i] != -1){
-            return dp[i];
-        }
-        int ans = Integer.MAX_VALUE;
-        for(int diff = 1; diff<=k ;diff++){
-            if(diff+i < n){
-                int cost = Math.abs(arr[i+diff] -  arr[i])+ func(arr , i+diff ,n ,k , dp);
-                ans = Math.min(ans , cost);
-            }
-            
-        }
-       return  dp[i] = ans;
-    }
-}
