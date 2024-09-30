@@ -64,31 +64,30 @@ class Solution
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
         // add your code here
-       
-      int indegree[] = new int[V];
-        for (int i = 0; i < V; i++) {
-            for (int it : adj.get(i)) {
-                indegree[it]++;
+        int indegree[] = new int[V];
+        int ans[] = new int[V];
+        Queue<Integer> q = new LinkedList<>();
+        for(ArrayList<Integer> arr : adj){
+            for(int i : arr){
+                indegree[i]++;
             }
         }
-        Queue<Integer> q = new LinkedList<>();
-        for(int i = 0 ; i< V ; i++){
-            if(indegree[i] == 0 ){
+        for(int i = 0 ; i<V ; i++){
+            if(indegree[i] == 0){
                 q.offer(i);
             }
         }
-        int ans[] = new int[V];
-        int i = 0;
+        int i =0 ;
         while(!q.isEmpty()){
             int curr = q.poll();
-            ans[i++] = curr;
-            for(int k : adj.get(curr)){
-                indegree[k] --;
-                if(indegree[k] == 0){
-                    q.offer(k);
+            ans[i ++] = curr;
+            for(int a : adj.get(curr)){
+                indegree[a]--;
+                if(indegree[a] == 0){
+                    q.offer(a);
                 }
             }
         }
-        return ans;
+        return ans ;
     }
 }
