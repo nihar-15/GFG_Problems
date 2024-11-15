@@ -13,8 +13,10 @@ public class Main {
             String[] arr1Str = sc.nextLine().split(" ");
             int[] arr = Arrays.stream(arr1Str).mapToInt(Integer::parseInt).toArray();
             Solution ob = new Solution();
-            int ans = ob.print2largest(arr);
+            int ans = ob.getSecondLargest(arr);
             System.out.println(ans);
+
+            System.out.println("~");
         }
     }
 }
@@ -25,22 +27,18 @@ public class Main {
 // User function Template for Java
 
 class Solution {
-    public int print2largest(int[] arr) {
+    public int getSecondLargest(int[] arr) {
         // Code Here
-           int max= Integer.MIN_VALUE;
-        int smax= Integer.MIN_VALUE;
-        
-        for(int i =0; i<arr.length;i++){
-            if(arr[i]>max){
-                max = arr[i];
+             if(arr.length < 2){
+            return -1;
+        }
+        Arrays.sort(arr);
+        for(int i =arr.length -2 ; i >=0  ; i--){
+            if(arr[arr.length -1] > arr[i]){
+                return arr[i];
             }
         }
-        
-        for(int i=0; i<arr.length; i++){
-            if(arr[i]>smax && arr[i] != max){
-                smax = arr[i];
-        }
-    }
-    return smax;
+        return -1;
+
     }
 }
