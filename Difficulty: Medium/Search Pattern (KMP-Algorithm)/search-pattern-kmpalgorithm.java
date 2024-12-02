@@ -1,35 +1,33 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
 import java.io.*;
 import java.util.*;
 
-class GFG
-{
-    public static void main(String args[])throws IOException
-    {
+class GFG {
+    public static void main(String args[]) throws IOException {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-        while(t-- > 0)
-        {
+        while (t-- > 0) {
             String s, patt;
             s = sc.next();
             patt = sc.next();
-            
+
             Solution ob = new Solution();
-            
+
             ArrayList<Integer> res = ob.search(patt, s);
-            if(res.size()==0)
-                System.out.print(-1);
+            if (res.size() == 0)
+                System.out.print("[]");
             else {
-                for(int i = 0;i<res.size();i++)
-                    System.out.print(res.get(i) + " ");
+                for (int i = 0; i < res.size(); i++) System.out.print(res.get(i) + " ");
             }
-            System.out.println();    
+            System.out.println();
         }
     }
 }
 // } Driver Code Ends
+
+
 
 
 //User function Template for Java
@@ -55,7 +53,7 @@ class Solution
             }
 
             if (j == M) {
-                result.add(i - j + 1); // Pattern found at index i - j + 1 (1-based indexing)
+                result.add(i - j ); // Pattern found at index i - j + 1 (1-based indexing)
                 j = lps[j - 1];
             } else if (i < N && (j == 0 || pat.charAt(j) != txt.charAt(i))) {
                 if (j != 0) {
