@@ -29,6 +29,8 @@ public class GFG {
             int key = Integer.parseInt(in.readLine().trim());
 
             out.println(new Solution().search(arr, key));
+
+            out.println("~");
         }
         out.close();
     }
@@ -41,7 +43,8 @@ public class GFG {
 class Solution {
     int search(int[] arr, int key) {
         // Complete this function
-        for(int i =0 ; i <arr.length ; i++){
+        
+          for(int i =0 ; i <arr.length ; i++){
             if(key == arr[i]){
                 return i;
             }
