@@ -1,58 +1,59 @@
 //{ Driver Code Starts
-import java.util.*;
+// Initial Template for Java
+
 import java.io.*;
-class PeakElement{
-	public static void main(String[] args)throws IOException{
-        BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out=new PrintWriter(System.out);
-		int t=Integer.parseInt(in.readLine().trim());
-		while(t-->0){
-			int n=Integer.parseInt(in.readLine().trim());
-			int[] a=new int[n];
-		    int[] tmp=new int[n];
-		    String s[]=in.readLine().trim().split(" ");
-			for(int i=0;i<n;i++){
-				a[i]=Integer.parseInt(s[i]);
-				tmp[i] = a[i];
-			}
-		    
-		    int f=0;
-			int A=(new Solution()).peakElement(tmp,n);
-			
-			if(A<0 && A>=n)
-			    out.println(0);
-			else
-			{
-    			if(n==1 && A==0)
-    			    f=1;
-    			else if(A==0 && a[0]>=a[1])
-    			    f=1;
-    			else if(A==n-1 && a[n-1]>=a[n-2])
-    			    f=1;
-    			else if(A >= 0 && A < n && a[A] >=a[A+1] && a[A]>= a[A-1])
-    			    f=1;
-    			else
-    			    f=0;
-			    out.println(f);
-			}
-		}
-		out.close();
-	}
+import java.lang.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        while (t-- > 0) {
+            String arr[] = br.readLine().split(" ");
+            int a[] = new int[arr.length];
+
+            for (int i = 0; i < arr.length; i++) {
+                a[i] = Integer.parseInt(arr[i]);
+            }
+            Solution obj = new Solution();
+            int f = 0;
+            int idx = obj.peakElement(a);
+            int n = a.length;
+            if (idx < 0 && idx >= n)
+                System.out.println("false");
+            else {
+                if (n == 1 && idx == 0)
+                    f = 1;
+                else if (idx == 0 && a[0] > a[1])
+                    f = 1;
+                else if (idx == n - 1 && a[n - 1] > a[n - 2])
+                    f = 1;
+                else if (idx > 0 && idx < n && a[idx] > a[idx + 1] &&
+                         a[idx] > a[idx - 1])
+                    f = 1;
+                else
+                    f = 0;
+                if (f == 1) {
+                    System.out.println("true");
+                } else {
+                    System.out.println("false");
+                }
+            }
+            System.out.println("~");
+        }
+    }
 }
 // } Driver Code Ends
 
 
-/*Complete the function below*/
+class Solution {
 
-class Solution
-{
-	// Function to find the peak element
-	// arr[]: input array
-	// n: size of array a[]
-	public int peakElement(int[] arr,int n)
-    {
-       //add code here.
-       
+    public int peakElement(int[] arr) {
+        // code here
+        int n = arr.length ;
+         
        if(arr.length==1){
 		    return 0;
 		}
