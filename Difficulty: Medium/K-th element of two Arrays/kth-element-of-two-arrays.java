@@ -13,19 +13,20 @@ class GFG {
             int k = Integer.parseInt(br.readLine().trim());
 
             String[] line1 = br.readLine().trim().split(" ");
-            int[] arr1 = new int[line1.length];
+            int[] a = new int[line1.length];
             for (int i = 0; i < line1.length; i++) {
-                arr1[i] = Integer.parseInt(line1[i]);
+                a[i] = Integer.parseInt(line1[i]);
             }
 
             String[] line2 = br.readLine().trim().split(" ");
-            int[] arr2 = new int[line2.length];
+            int[] b = new int[line2.length];
             for (int i = 0; i < line2.length; i++) {
-                arr2[i] = Integer.parseInt(line2[i]);
+                b[i] = Integer.parseInt(line2[i]);
             }
 
             Solution ob = new Solution();
-            System.out.println(ob.kthElement(k, arr1, arr2));
+            System.out.println(ob.kthElement(a, b, k));
+            System.out.println("~");
         }
     }
 }
@@ -36,22 +37,25 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public long kthElement(int k, int arr1[], int arr2[]) {
+    public int kthElement(int a[], int b[], int k) {
         // code here
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for(int a : arr1){
-            pq.offer(a);
-            if(pq.size() > k){
-                pq.poll();
+          int n = a.length;
+        int m = b.length;
+        int[] res = new int[m+n];
+        int i=0,j=0,x=0;
+        while(i<n && j<m){
+            if(a[i]<=b[j]){
+                res[x++] = a[i++];
+            }else{
+                res[x++] = b[j++];
             }
         }
-         for(int a : arr2){
-            pq.offer(a);
-            if(pq.size() > k){
-                pq.poll();
-            }
+        while(i<n){
+            res[x++] = a[i++];
         }
-        
-        return pq.poll();
+        while(j<m){
+            res[x++] = b[j++];
+        }
+        return res[k-1];
     }
 }
