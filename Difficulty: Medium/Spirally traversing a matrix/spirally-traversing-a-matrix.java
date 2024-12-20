@@ -20,11 +20,17 @@ class GFG {
             ArrayList<Integer> ans = ob.spirallyTraverse(matrix);
             for (Integer val : ans) System.out.print(val + " ");
             System.out.println();
+
+            System.out.println("~");
         }
     }
 }
 // } Driver Code Ends
 
+
+
+    // Function to return a list of integers denoting spiral traversal of matrix.
+   
 
 class Solution {
     // Function to return a list of integers denoting spiral traversal of matrix.
@@ -67,5 +73,7 @@ class Solution {
                     return list;
             }t++;d--;s++;
         }
+       // return list; 
     }
 }
+
